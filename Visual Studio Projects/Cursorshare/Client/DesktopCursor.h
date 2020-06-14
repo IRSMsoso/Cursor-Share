@@ -14,10 +14,13 @@ public:
 
 	sf::RenderWindow* getWindow() { return &window; }
 
+	int getID() { return id; }
+	void setID(int newID) { id = newID; }
+
 
 private:
 	sf::RenderWindow window;
 	sf::Sprite cursorSprite;
 
-	MARGINS margins;
+	int id;
 };

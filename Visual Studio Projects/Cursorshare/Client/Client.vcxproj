@@ -158,9 +158,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="DesktopCursor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientManager.h" />
     <ClInclude Include="DesktopCursor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

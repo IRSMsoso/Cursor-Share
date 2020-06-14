@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-#include "DesktopCursor.h"
+#include "ClientManager.h"
 
 
 void initializeCursor(DesktopCursor&, MARGINS&);
@@ -10,22 +10,27 @@ void initializeCursor(DesktopCursor&, MARGINS&);
 
 int main()
 {
-	sf::Texture cursorTexture;
-	cursorTexture.loadFromFile("Cursor.png");
-
-	std::vector<DesktopCursor> cursors;
-
-
 	MARGINS margins;
 
+	ClientManager manager;
 
+	std::cout << "Please enter the IP Address of a server to connect to.\n";
 
-	int currentPos = 0;
-	while (true) {
-		sf::sleep(sf::milliseconds(10));
-		dude.setPosition(sf::Vector2i(currentPos + 1, 0));
-		currentPos += 1;
+	bool done = false;
+
+	while (!done) {
+		std::string intAddress;
+		std::cin >> intAddress;
+
+		sf::IpAddress address(intAddress);
+
+		done = manager.connect(address);
 	}
+
+	std::cout << "Connected!\n";
+
+
+	
 
 	std::system("pause");
 	return 0;
