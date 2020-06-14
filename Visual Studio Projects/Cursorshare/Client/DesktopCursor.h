@@ -23,4 +23,6 @@ private:
 	sf::Sprite cursorSprite;
 
 	int id;
+
+	MARGINS margins;
 };

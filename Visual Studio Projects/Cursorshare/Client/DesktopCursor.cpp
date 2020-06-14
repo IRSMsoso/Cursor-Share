@@ -8,6 +8,8 @@ DesktopCursor::DesktopCursor(sf::Color color, sf::Texture& texture): window(sf::
 	window.draw(cursorSprite);
 	window.display();
 	
+	SetWindowLong(window.getSystemHandle(), GWL_STYLE, WS_POPUP | WS_VISIBLE);
+	DwmExtendFrameIntoClientArea(window.getSystemHandle(), &margins);
 }
 
 void DesktopCursor::setPosition(sf::Vector2i newPos){

@@ -6,11 +6,11 @@ Manager::Manager(){
 	}
 
 	running = true;
-
-	srand(time(NULL));
 }
 
 void Manager::listen(){
+
+	srand(time(NULL));
 
 	sf::SocketSelector selector;
 	
@@ -23,7 +23,6 @@ void Manager::listen(){
 			selector.add(*userList.at(i)->getSocket());
 		}
 		userListMutex.unlock();
-
 
 		if (selector.wait(sf::seconds(60))) {
 			if (selector.isReady(listener)) {
@@ -38,6 +37,7 @@ void Manager::listen(){
 				int newID;
 				while (!newIDUnique) {
 					newID = (rand() % 99999) + 1;
+					std::cout << "NEW ID: " << newID << std::endl;
 					newIDUnique = true;
 					for (int i = 0; i < userList.size(); i++) {
 						if (userList.at(i)->getID() == newID)
@@ -61,6 +61,7 @@ void Manager::listen(){
 			userListMutex.unlock();
 
 		}
+		selector.clear();
 	}
 }
 
@@ -89,6 +90,11 @@ void Manager::cleanUp(){
 		for (int i = 0; i < userList.size(); i++) {
 			if (userList.at(i)->getTimeoutTime() > sf::seconds(10)) {
 				std::cout << "Deleted user with ID: " << userList.at(i)->getID() << " due to timeout\n";
+
+				for (int w = 0; w < userList.size(); w++) {
+					userList.at(w)->unpair(userList.at(i));
+				}
+
 				delete userList.at(i);
 				userList.erase(userList.begin() + i);
 			}

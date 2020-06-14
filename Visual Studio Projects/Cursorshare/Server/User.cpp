@@ -3,10 +3,8 @@
 
 
 User::~User(){
+	socket->disconnect();
 	delete socket;
-	for (int i = 0; i < connectedUsers.size(); i++) {
-		delete connectedUsers.at(i);
-	}
 }
 
 void User::receive(){
@@ -34,4 +32,13 @@ bool User::canPair(){
 		return false;
 	else
 		return true;
+}
+
+void User::unpair(User * oldUser){
+	for (int i = 0; i < connectedUsers.size(); i++) {
+		if (connectedUsers.at(i) == oldUser) {
+			connectedUsers.erase(connectedUsers.begin() + i);
+			std::cout << "Erased Paired User\n";
+		}
+	}
 }

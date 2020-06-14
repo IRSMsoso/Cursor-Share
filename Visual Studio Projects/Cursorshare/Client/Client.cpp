@@ -30,6 +30,14 @@ int main()
 	std::cout << "Connected!\n";
 
 
+	sf::Thread listenThread(&ClientManager::listen, &manager);
+	sf::Thread sendThread(&ClientManager::send, &manager);
+
+	listenThread.launch();
+	sendThread.launch();
+
+	listenThread.wait();
+	sendThread.wait();
 	
 
 	std::system("pause");

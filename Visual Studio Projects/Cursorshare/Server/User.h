@@ -26,12 +26,13 @@ public:
 	bool canPair();
 
 	void pair(User* newUser) { connectedUsers.push_back(newUser); }
+	void unpair(User* oldUser);
 
 private:
 	sf::TcpSocket* socket;
 	sf::Vector2i location;
 	std::vector<User*> connectedUsers;
-	int id;
+	sf::Int32 id;
 	sf::Clock timeoutClock;
 };
 
